@@ -25,4 +25,8 @@
     <PackageReference Include="Microsoft.Graph" Version="5.43.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
