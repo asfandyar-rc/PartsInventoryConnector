@@ -106,14 +106,10 @@ static DateTime GetLastUploadTime()
 
     return DateTime.MinValue;
 }
-
 static void SaveLastUploadTime(DateTime uploadTime)
 {
     File.WriteAllText("lastuploadtime.bin", uploadTime.ToString("u"));
 }
-// </ProgramSnippet>
-
-// <InitializeGraphSnippet>
 void InitializeGraph(Settings settings)
 {
     try
@@ -124,10 +120,8 @@ void InitializeGraph(Settings settings)
     {
         Console.WriteLine($"Error initializing Graph: {ex.Message}");
     }
-}
-// </InitializeGraphSnippet>
 
-// <CreateConnectionSnippet>
+}
 async Task<ExternalConnection?> CreateConnectionAsync()
 {
     var connectionId = PromptForInput(
@@ -151,9 +145,6 @@ async Task<ExternalConnection?> CreateConnectionAsync()
         return null;
     }
 }
-// </CreateConnectionSnippet>
-
-// <GetConnectionsSnippet>
 async Task<ExternalConnection?> SelectExistingConnectionAsync()
 {
     // TODO
@@ -207,9 +198,6 @@ async Task<ExternalConnection?> SelectExistingConnectionAsync()
         return null;
     }
 }
-// </GetConnectionsSnippet>
-
-// <DeleteConnectionSnippet>
 async Task DeleteCurrentConnectionAsync(ExternalConnection? connection)
 {
     if (connection == null)
@@ -229,9 +217,6 @@ async Task DeleteCurrentConnectionAsync(ExternalConnection? connection)
         Console.WriteLine($"Error deleting connection: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
     }
 }
-// </DeleteConnectionSnippet>
-
-// <RegisterSchemaSnippet>
 async Task RegisterSchemaAsync()
 {
     if (currentConnection == null)
@@ -250,11 +235,11 @@ async Task RegisterSchemaAsync()
             BaseType = "microsoft.graph.externalItem",
             Properties = new List<Property>
             {
-                new Property { Name = "partNumber", Type = PropertyType.Int64, IsQueryable = true, IsSearchable = false, IsRetrievable = true, IsRefinable = true },
+                new Property { Name = "partNumber", Type = PropertyType.Int64, IsQueryable = true, IsSearchable = true, IsRetrievable = true, IsRefinable = true },
                 new Property { Name = "name", Type = PropertyType.String, IsQueryable = true, IsSearchable = true, IsRetrievable = true, IsRefinable = false, Labels = new List<Label?>() { Label.Title }},
-                new Property { Name = "description", Type = PropertyType.String, IsQueryable = false, IsSearchable = true, IsRetrievable = true, IsRefinable = false },
-                new Property { Name = "price", Type = PropertyType.Double, IsQueryable = true, IsSearchable = false, IsRetrievable = true, IsRefinable = true },
-                new Property { Name = "inventory", Type = PropertyType.Int64, IsQueryable = true, IsSearchable = false, IsRetrievable = true, IsRefinable = true },
+                new Property { Name = "description", Type = PropertyType.String, IsQueryable = true, IsSearchable = true, IsRetrievable = true, IsRefinable = false},
+                new Property { Name = "price", Type = PropertyType.Double, IsQueryable = true, IsSearchable = true, IsRetrievable = true, IsRefinable = true },
+                new Property { Name = "inventory", Type = PropertyType.Int64, IsQueryable = true, IsSearchable = true, IsRetrievable = true, IsRefinable = true },
                 new Property { Name = "appliances", Type = PropertyType.StringCollection, IsQueryable = true, IsSearchable = true, IsRetrievable = true, IsRefinable = false }
             },
         };
@@ -271,9 +256,6 @@ async Task RegisterSchemaAsync()
         Console.WriteLine($"Error registering schema: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
     }
 }
-// </RegisterSchemaSnippet>
-
-// <GetSchemaSnippet>
 async Task GetSchemaAsync()
 {
     if (currentConnection == null)
@@ -293,9 +275,6 @@ async Task GetSchemaAsync()
         Console.WriteLine($"Error getting schema: {odataError.ResponseStatusCode}: {odataError.Error?.Code} {odataError.Error?.Message}");
     }
 }
-// </GetSchemaSnippet>
-
-// <UpdateItemsFromDatabaseSnippet>
 async Task UpdateItemsFromDatabaseAsync(bool uploadModifiedOnly, string? tenantId)
 {
     if (currentConnection == null)
