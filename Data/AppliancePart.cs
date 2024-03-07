@@ -31,13 +31,13 @@ public class AppliancePart
         {
             AdditionalData = new Dictionary<string, object>
             {
-                { "PartNumber", PartNumber },
-                { "Name", Name },
-                { "Description", Description },
-                { "Price", Price },
-                { "Inventory", Inventory },
+                { "partNumber", PartNumber },
+                { "name", Name },
+                { "description", Description },
+                { "price", Price },
+                { "inventory", Inventory },
                 { "appliances@odata.type", "Collection(String)" },
-                { "Appliances", Appliances }
+                { "appliances", Appliances }
             }
         };
 
